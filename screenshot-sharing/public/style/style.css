@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap");
+
+/* variables in the root : design system */
+html * {
+  /* fonts */
+  --highlight-font: "Bebas Neue", Arial;
+  --normal-font: "Roboto", Arial;
+  /* color */
+  --bright-orange: hsl(40, 97%, 64%);
+  --dark-grey: hsl(201, 20%, 24%);
+  /* gaps */
+  --tiny-gap: calc(var(--small-gap) / 2);
+  --small-gap: 20px;
+  --medium-gap: calc(var(--small-gap) * 2);
+  --large-gap: calc(var(--small-gap) * 4);
+  --massive-gap: calc(var(--small-gap) * 6);
+
+  font-family: var(--normal-font);
+  text-align: center;
+}
+
+/* ----- STYLE ----- */
+
+.display-flex {
+  display: flex;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.highlight-font {
+  font-family: var(--highlight-font);
+  letter-spacing: 1px; /* makes the font look better */
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* ----- SPECIFIC THINGS ----- */
+
+.main-header {
+  padding-left: var(--tiny-gap);
+  background: var(--dark-grey);
+  color: var(--bright-orange);
+  font-size: 3rem;
+  height: 75px;
+}
+
+/* ----- CARD ----- */
+.card {
+  margin-top: var(--medium-gap);
+  width: 90%;
+  background: var(--bright-orange);
+}
+
+.card * {
+  margin-top: var(--small-gap);
+}
+
+.card-list {
+  margin-top: var(--large-gap);
+}
+
+.card-list li {
+  width: 100%;
+  padding: 0 var(--small-gap);
+  padding-bottom: var(--small-gap);
+}
