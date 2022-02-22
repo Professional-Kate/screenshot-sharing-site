@@ -4,7 +4,7 @@ const Header = ({ gameName }) => {
   return (
     <header
       id="page-header"
-      className="main-header display-flex flex-align-center"
+      className="main-header display-flex flex-align-center nice-box-shadow"
     >
       <nav id="header-nav">
         <ul id="header-list">

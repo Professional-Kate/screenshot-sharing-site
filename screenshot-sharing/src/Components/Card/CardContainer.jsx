@@ -25,7 +25,9 @@ const CardContainer = () => {
       className="display-flex flex-column flex-align-center"
     >
       {!(data.length === 0) &&
-        data.map((photo, index) => <Card data={photo} key={index} />)}
+        data.map((photo, index) => (
+          <Card data={photo} key={index} id={index} />
+        ))}
     </section>
   );
 };

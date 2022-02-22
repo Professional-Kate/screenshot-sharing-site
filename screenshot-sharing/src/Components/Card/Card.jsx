@@ -3,16 +3,24 @@ import CardList from "./CardList";
 
 const Card = ({ data }) => {
   return (
-    <article id="card" className="card display-flex flex-column">
-      <h2 id="card-title">{data.title}</h2>
+    <article
+      id={"card-" + data.id}
+      className="card display-flex flex-column nice-box-shadow"
+    >
+      <h2 id="card-title" className="card-heading">
+        {data.title}
+      </h2>
       {/* without the require this doesn't work. Require tells webpack to actually include the image instead of not and wasting AN HOUR OF MY TIME AAA */}
       <img
         src={require("./../../../Photos/Elden-Ring/" + data.photo_path)}
         id="card-image"
-        alt="PIC-TURE"
+        alt={data.description}
+        className="card-image"
       />
-      <p id="card-text">{data.description}</p>
-      <CardList />
+      <p id="card-text" className="card-text">
+        {data.description}
+      </p>
+      <CardList id={data.id} />
     </article>
   );
 };
