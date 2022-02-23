@@ -98,3 +98,19 @@ html * {
 .card-rating {
   font-size: 1.25rem;
 }
+
+.card-progress {
+  margin-top: var(--tiny-gap);
+  width: 100%;
+}
+
+/* dislike bar */
+progress[value] {
+  border: none;
+  background: hsl(340, 97%, 45%);
+}
+
+/*  like bar */
+progress::-moz-progress-bar {
+  background: hsl(76, 97%, 45%);
+}

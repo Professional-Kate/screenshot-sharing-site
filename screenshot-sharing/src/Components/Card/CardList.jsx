@@ -3,34 +3,47 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const icons = require("@fortawesome/free-solid-svg-icons");
 
 const CardList = ({ id }) => {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState({ likes: 0, dislikes: 0 });
 
-  const shouldIncreaseRating = (bool) =>
-    setRating((rating) => (rating += bool ? 1 : -1));
+  const increaseRating = (string) =>
+    setRating((rating) => {
+      const newRating = { ...rating };
+      newRating[string]++;
+      return newRating;
+    });
 
   return (
-    <ul
-      id="card-list"
-      className="display-flex card-list flex-justify-center card-rating"
-    >
-      <li id={`card-${id}-thumbs-up`}>
-        <FontAwesomeIcon
-          onClick={() => shouldIncreaseRating(true)}
-          icon={icons.faThumbsUp}
-          className="cursor-pointer fa-2x"
+    <div>
+      <ul
+        id="card-list"
+        className="display-flex card-list flex-justify-center card-rating"
+      >
+        <li id={`card-${id}-thumbs-up`}>
+          <FontAwesomeIcon
+            onClick={() => increaseRating("likes")}
+            icon={icons.faThumbsUp}
+            className="cursor-pointer fa-2x"
+          />
+          <h3 id="card-thumbs-up-number">{rating.likes}</h3>
+        </li>
+        <li id={`card-${id}-thumbs-down`}>
+          <FontAwesomeIcon
+            onClick={() => increaseRating("dislikes")}
+            icon={icons.faThumbsDown}
+            className="cursor-pointer fa-2x"
+          />
+          <h3 id="card-thumbs-down-number">{rating.dislikes}</h3>
+        </li>
+      </ul>
+      {!(rating.likes === 0 && rating.dislikes === 0) && (
+        <progress
+          className="card-progress"
+          id="card-rating"
+          max={rating.likes + rating.dislikes}
+          value={rating.likes}
         />
-      </li>
-      <li>
-        <h3 id="card-rating">{rating}</h3>
-      </li>
-      <li id={`card-${id}-thumbs-down`}>
-        <FontAwesomeIcon
-          onClick={() => shouldIncreaseRating(false)}
-          icon={icons.faThumbsDown}
-          className="cursor-pointer fa-2x"
-        />
-      </li>
-    </ul>
+      )}
+    </div>
   );
 };
 
