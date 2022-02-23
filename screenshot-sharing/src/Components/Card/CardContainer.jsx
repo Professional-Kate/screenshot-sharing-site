@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const CardContainer = () => {
+const CardContainer = ({ fa, icons }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const CardContainer = () => {
     >
       {!(data.length === 0) &&
         data.map((photo, index) => (
-          <Card data={photo} key={index} id={index} />
+          <Card data={photo} key={index} id={index} fa={fa} icons={icons} />
         ))}
     </section>
   );

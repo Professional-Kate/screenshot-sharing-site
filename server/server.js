@@ -37,14 +37,13 @@ app.get("/ratings/:id?", async (req, res) => {
     : res.json(rows);
 });
 
+// GET "/ratings/update/{id}?" : id in route optional if not provided will use req.body
 app.post("/ratings/update/:id?", async (req, res) => {
   // can use param or req.body for rating_id
   const { dislikes, likes } = req.body;
   const id = req.body.rating_id || parseInt(req.params.id); // req.body is prioritized
   const params = [id];
   let query = `UPDATE ratings SET `;
-
-  console.log(req.body);
 
   const { rows } = await pool.query(
     `SELECT EXISTS(SELECT id FROM ratings WHERE id = $1);`,
@@ -85,6 +84,24 @@ app.post("/ratings/update/:id?", async (req, res) => {
   }
 
   return res.status(400).json({ message: `No rows with id of ${id} found` });
+});
+
+// GET "/games/{id}?" : id optional, if not provided will return everything.
+app.get("/games/:id?", async (req, res) => {
+  const query = `SELECT name FROM games`;
+  const { id } = req.params;
+
+  if (id === undefined) {
+    console.log("reached");
+    const { rows } = await pool.query(`${query};`);
+    return res.json(rows);
+  }
+
+  const { rows } = await pool.query(`${query} WHERE id = $1;`, [id]);
+
+  rows.length === 0
+    ? res.status(400).json({ message: `No row with id of ${id} was found` })
+    : res.json(rows);
 });
 
 // GET "/" : serves all rows from the database.

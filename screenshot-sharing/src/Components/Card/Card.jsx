@@ -1,7 +1,7 @@
 import React from "react";
 import CardList from "./CardList";
 
-const Card = ({ data }) => {
+const Card = ({ data, fa, icons }) => {
   return (
     <article
       id={"card-" + data.id}
@@ -22,7 +22,9 @@ const Card = ({ data }) => {
       </p>
       <CardList
         id={data.id}
-        rating={{ likes: data.likes, dislikes: data.dislikes }}
+        ratingObject={{ likes: data.likes, dislikes: data.dislikes }}
+        FontAwesomeIcon={fa}
+        icons={icons}
       />
     </article>
   );

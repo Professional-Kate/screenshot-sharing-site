@@ -62,11 +62,38 @@ html * {
 /* ----- SPECIFIC THINGS ----- */
 
 .main-header {
-  padding-left: var(--tiny-gap);
   background: var(--dark-grey);
   color: var(--bright-orange);
   font-size: var(--slightly-bigger-font);
   height: var(--massive-gap);
+  transition: all ease-in-out 1s;
+}
+
+.extend-header {
+  height: calc(var(--massive-gap) * 7);
+  transition: all ease-in-out 1s;
+}
+
+.hamburger-icon {
+  padding-bottom: var(--medium-gap);
+}
+
+.header-list {
+  width: 100%;
+  padding-top: var(--tiny-gap);
+  align-items: center;
+}
+
+.title-input {
+  display: flex;
+  text-align: left;
+  padding: var(--tiny-gap);
+  width: 80%;
+  margin: var(--small-gap) auto;
+}
+
+.title-input-label {
+  font-size: var(--large-font);
 }
 
 /* ----- CARD ----- */
@@ -114,22 +141,25 @@ html * {
 /* ----- RATING BUTTONS ----- */
 
 /* dislike button */
-#card-2-thumbs-down > .rating-button:hover {
+.rating-button-down:hover {
   color: var(--dislike-color);
 }
 
 /* like button */
-#card-2-thumbs-up > .rating-button:hover {
+.rating-button-up:hover {
   color: var(--like-color);
 }
 
 /* both buttons */
-.rating-button {
+.rating-button-up,
+.rating-button-down {
   font-size: var(--large-font);
 }
 
-.rating-button:hover,
-.rating-button:active {
+.rating-button-up:hover,
+.rating-button-down:hover,
+.rating-button-down:active,
+.rating-button-up:active {
   transition: all 0.2s ease-out;
   opacity: 0.9;
 }
