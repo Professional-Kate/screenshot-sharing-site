@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const icons = require("@fortawesome/free-solid-svg-icons");
 
-const CardList = ({ id }) => {
-  const [rating, setRating] = useState({ likes: 0, dislikes: 0 });
+const CardList = (params) => {
+  const [rating, setRating] = useState({ ...params.rating });
 
-  const increaseRating = (string) =>
+  useEffect(() => {
+    const updateData = async function () {
+      await fetch(`http://127.0.0.1:5000/ratings/update/${params.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(rating),
+      });
+    };
+
+    updateData();
+  }, [params.id, rating]);
+
+  const shouldIncreaseRating = (string) =>
     setRating((rating) => {
       const newRating = { ...rating };
       newRating[string]++;
@@ -18,19 +32,19 @@ const CardList = ({ id }) => {
         id="card-list"
         className="display-flex card-list flex-justify-center card-rating"
       >
-        <li id={`card-${id}-thumbs-up`}>
+        <li id={`card-${params.id}-thumbs-up`}>
           <FontAwesomeIcon
-            onClick={() => increaseRating("likes")}
             icon={icons.faThumbsUp}
-            className="cursor-pointer fa-2x"
+            className="cursor-pointer rating-button"
+            onClick={() => shouldIncreaseRating("likes")}
           />
           <h3 id="card-thumbs-up-number">{rating.likes}</h3>
         </li>
-        <li id={`card-${id}-thumbs-down`}>
+        <li id={`card-${params.id}-thumbs-down`}>
           <FontAwesomeIcon
-            onClick={() => increaseRating("dislikes")}
             icon={icons.faThumbsDown}
-            className="cursor-pointer fa-2x"
+            className="cursor-pointer rating-button"
+            onClick={() => shouldIncreaseRating("dislikes")}
           />
           <h3 id="card-thumbs-down-number">{rating.dislikes}</h3>
         </li>

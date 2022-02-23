@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap");
 
-/* variables in the root : design system */
+/* variables in the root : OUR design system */
 html * {
   /* fonts */
   --highlight-font: "Bebas Neue", Arial;
@@ -14,9 +14,18 @@ html * {
   --medium-gap: calc(var(--small-gap) * 2);
   --large-gap: calc(var(--small-gap) * 4);
   --massive-gap: calc(var(--small-gap) * 6);
+  /* font size */
+  --normal-font: 1rem;
+  --medium-font: calc(var(--slightly-bigger-font) / 2);
+  --large-font: calc(var(--normal-font) * 2);
+  --slightly-bigger-font: calc(var(--normal-font) * 3);
 
   font-family: var(--normal-font);
   text-align: center;
+
+  /* rating buttons */
+  --dislike-color: hsl(340, 97%, 50%);
+  --like-color: hsl(76, 97%, 50%);
 }
 
 /* ----- STYLE ----- */
@@ -56,11 +65,12 @@ html * {
   padding-left: var(--tiny-gap);
   background: var(--dark-grey);
   color: var(--bright-orange);
-  font-size: 3rem;
-  height: 75px;
+  font-size: var(--slightly-bigger-font);
+  height: var(--massive-gap);
 }
 
 /* ----- CARD ----- */
+
 .card {
   margin-top: var(--medium-gap);
   width: 95%;
@@ -69,6 +79,22 @@ html * {
 
 .card * {
   margin-top: var(--small-gap);
+}
+
+.card-heading {
+  font-size: var(--large-font);
+  font-size: var(--slightly-bigger-font);
+}
+
+.card-image {
+  width: 95%;
+  padding: var(--small-gap) 0;
+  margin: 0 auto; /* center the image in the parent */
+}
+
+.card-text {
+  font-size: var(--medium-font);
+  padding: 0 var(--tiny-gap);
 }
 
 .card-list {
@@ -81,22 +107,31 @@ html * {
   padding-bottom: var(--small-gap);
 }
 
-.card-heading {
-  font-size: 2.5rem;
-}
-
-.card-image {
-  padding: var(--small-gap) 0;
-  width: 95%;
-  margin: 0 auto;
-}
-
-.card-text {
-  font-size: 1.5rem;
-}
-
 .card-rating {
-  font-size: 1.25rem;
+  font-size: var(--small-font);
+}
+
+/* ----- RATING BUTTONS ----- */
+
+/* dislike button */
+#card-2-thumbs-down > .rating-button:hover {
+  color: var(--dislike-color);
+}
+
+/* like button */
+#card-2-thumbs-up > .rating-button:hover {
+  color: var(--like-color);
+}
+
+/* both buttons */
+.rating-button {
+  font-size: var(--large-font);
+}
+
+.rating-button:hover,
+.rating-button:active {
+  transition: all 0.2s ease-out;
+  opacity: 0.9;
 }
 
 .card-progress {
@@ -104,13 +139,15 @@ html * {
   width: 100%;
 }
 
-/* dislike bar */
+/* ---- PROGRESS BAR : LIKE/DISLIKE BAR */
+
+/* dislikes */
 progress[value] {
   border: none;
-  background: hsl(340, 97%, 45%);
+  background: var(--dislike-color);
 }
 
-/*  like bar */
+/*  likes */
 progress::-moz-progress-bar {
-  background: hsl(76, 97%, 45%);
+  background: var(--like-color);
 }

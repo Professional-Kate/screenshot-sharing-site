@@ -7,12 +7,12 @@ const Card = ({ data }) => {
       id={"card-" + data.id}
       className="card display-flex flex-column nice-box-shadow"
     >
-      <h2 id="card-title" className="card-heading">
+      <h2 id="card-title" className="card-heading highlight-font">
         {data.title}
       </h2>
       {/* without the require this doesn't work. Require tells webpack to actually include the image instead of not and wasting AN HOUR OF MY TIME AAA */}
       <img
-        src={require("./../../../Photos/Elden-Ring/" + data.photo_path)}
+        src={require("./../../" + data.photo_path)}
         id="card-image"
         alt={data.description}
         className="card-image"
@@ -20,7 +20,10 @@ const Card = ({ data }) => {
       <p id="card-text" className="card-text">
         {data.description}
       </p>
-      <CardList id={data.id} />
+      <CardList
+        id={data.id}
+        rating={{ likes: data.likes, dislikes: data.dislikes }}
+      />
     </article>
   );
 };
